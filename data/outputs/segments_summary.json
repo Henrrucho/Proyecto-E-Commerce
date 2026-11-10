@@ -1,0 +1,62 @@
+{
+ "modelo": {
+  "familia": "Algoritmo genético",
+  "conjunto": "B",
+  "k": 3,
+  "silueta_train": 0.24904151464255073,
+  "silueta_test": 0.2525731727870263,
+  "semilla": 42
+ },
+ "clientes": 50000,
+ "tiempo_inferencia_ms": 41.4,
+ "aviso": "Los nombres de grupo describen el reparto; con silueta baja no son grupos naturales de clientes.",
+ "grupos": [
+  {
+   "grupo": 0,
+   "nombre": "Grupo 0: compra hace mucho y pocas quejas",
+   "clientes": 5813,
+   "porcentaje": 0.11626,
+   "days_since_last_purchase": 281.9298124892,
+   "total_purchases": 103.1983485292,
+   "avg_order_value_usd": 508.7659160502,
+   "return_count": 9.3927404094,
+   "complaint_count": 6.3970411147,
+   "satisfaction_score": 2.9712712885,
+   "tenure_months": 58.7312919319,
+   "rasgos_distintivos": "days_since_last_purchase (+2.35 sd), complaint_count (-0.14 sd)"
+  },
+  {
+   "grupo": 1,
+   "nombre": "Grupo 1: pocas compras y muchas devoluciones",
+   "clientes": 5445,
+   "porcentaje": 0.1089,
+   "days_since_last_purchase": 42.2124885216,
+   "total_purchases": 35.7006427916,
+   "avg_order_value_usd": 582.0997814509,
+   "return_count": 12.9794306703,
+   "complaint_count": 8.2262626263,
+   "satisfaction_score": 2.7691460055,
+   "tenure_months": 45.5164370983,
+   "rasgos_distintivos": "total_purchases (-1.10 sd), return_count (+0.60 sd)"
+  },
+  {
+   "grupo": 2,
+   "nombre": "Grupo 2: compra reciente y muchas compras",
+   "clientes": 38742,
+   "porcentaje": 0.77484,
+   "days_since_last_purchase": 33.0353879511,
+   "total_purchases": 107.8065407052,
+   "avg_order_value_usd": 494.072478189,
+   "return_count": 9.0422280729,
+   "complaint_count": 6.9101233803,
+   "satisfaction_score": 3.0470290641,
+   "tenure_months": 61.9010376336,
+   "rasgos_distintivos": "days_since_last_purchase (-0.32 sd), total_purchases (+0.15 sd)"
+  }
+ ],
+ "alertas": {
+  "Normal": 19143,
+  "Atención": 18156,
+  "Alerta": 12701
+ }
+}
