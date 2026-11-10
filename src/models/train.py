@@ -30,7 +30,7 @@ from sklearn.cluster import KMeans
 from sklearn.metrics import adjusted_rand_score
 
 from src import config_columns as cfg
-from src.data import generate, preprocess
+from src.data import diagnostico, generate, preprocess
 from src.models import evaluacion, perfiles
 from src.models.ga_clustering import AGClustering
 
@@ -239,6 +239,7 @@ def main(argv=None):
     p.add_argument("--reports", default=str(RAIZ / "reports"))
     p.add_argument("--outputs", default=str(RAIZ / "data" / "outputs"), help="carpeta con los archivos para el dashboard")
     p.add_argument("--seed", type=int, default=cfg.SEED)
+    p.add_argument("--test-size", type=float, default=cfg.TEST_SIZE, help="fracción para prueba (0.20 = partición 80/20)")
     p.add_argument("--quick", action="store_true", help="corrida reducida para pruebas")
     a = p.parse_args(argv)
     salida, reportes = Path(a.output), Path(a.reports)
@@ -255,8 +256,18 @@ def main(argv=None):
     LOG.info("Limpieza: %d duplicados, nulos imputados %s, nulos restantes %d", informe["duplicados_eliminados"],
              informe["nulos_imputados"], informe["nulos_restantes"])
     LOG.info("Se excluyen %d columnas derivadas y %d sin valor para el modelo", len(cfg.DERIVED_COLUMNS), len(cfg.IGNORED_COLUMNS))
-    train, test = preprocess.particionar(df, a.seed)
-    LOG.info("Conjunto Train: %s muestras | Conjunto Test: %s muestras | semilla %d", f"{len(train):,}", f"{len(test):,}", a.seed)
+    procesados = Path(a.outputs).parent / "processed"
+    procesados.mkdir(parents=True, exist_ok=True)
+    (procesados / "data_quality_report.json").write_text(json.dumps(informe, ensure_ascii=False, indent=1), encoding="utf-8")
+    df.to_csv(procesados / "clean_customers.csv", index=False)  # no se versiona (ver .gitignore): se regenera en cada corrida
+    dx = diagnostico.diagnosticar(df)
+    diagnostico.guardar(dx, reportes)
+    r = dx["resumen"]
+    LOG.info("Diagnóstico de datos: |correlación de Pearson| máxima entre las 8 numéricas = %.3f (%s con %s; ruido esperado ±%.4f); eta máximo categoría-variable = %.3f (esperado por azar %.3f)",
+             r["pearson_max_abs"], *r["pearson_max_par"], r["ruido_esperado_pearson"], r["eta_max"], r["eta_max_esperado_por_azar"])
+    train, test = preprocess.particionar(df, a.seed, a.test_size)
+    LOG.info("Partición %d/%d: Conjunto Train: %s muestras | Conjunto Test: %s muestras | semilla %d", round(100 * (1 - a.test_size)), round(100 * a.test_size),
+             f"{len(train):,}", f"{len(test):,}", a.seed)
 
     LOG.info("== Experimentos 1 a 6 ==")
     tabla, modelos, espacios = experimentos_principales(train, test, a.quick, a.seed)
@@ -318,11 +329,15 @@ def main(argv=None):
     graficar(tabla, ga_k, ga_k.k, ctab, reportes)
     perfil.to_csv(reportes / "perfil_grupos.csv", index=False)
     resumen = {
-        "semilla": a.seed, "filas_entrenamiento": len(train), "filas_prueba": len(test), "limpieza": informe,
+        "semilla": a.seed, "test_size": a.test_size, "filas_entrenamiento": len(train), "filas_prueba": len(test), "limpieza": informe,
         "ganador": json.loads(ganador.to_json()), "estabilidad_ari": {k: {"medio": v[0], "minimo": v[1]} for k, v in est.items()},
         "tiempo_total_s": time.perf_counter() - inicio,
     }
     (reportes / "metrics.json").write_text(json.dumps(resumen, ensure_ascii=False, indent=1, default=float), encoding="utf-8")
+    Path(a.outputs).mkdir(parents=True, exist_ok=True)
+    contrato = {**resumen, "diagnostico_datos": dx["resumen"], "experimentos": json.loads(tabla.to_json(orient="records")),
+                "robustez": json.loads(rob.to_json(orient="records"))}
+    (Path(a.outputs) / "clustering_metrics.json").write_text(json.dumps(contrato, ensure_ascii=False, indent=1), encoding="utf-8")
 
     from src.models import predict
     predict.exportar_resultados(df, Path(a.outputs), salida / "modelo_candidato.joblib", salida / "preprocesador.joblib", reportes)

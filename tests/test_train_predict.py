@@ -26,7 +26,14 @@ def test_se_generan_todos_los_artefactos(corrida):
         assert (m / archivo).exists(), archivo
     for archivo in ("experimentos.csv", "metrics.json", "convergencia.png", "comparacion.png", "robustez.csv", "log_entrenamiento.txt"):
         assert (r / archivo).exists(), archivo
-    assert (s / "customer_assignments.csv").exists() and (s / "segments_summary.json").exists()
+    assert (s / "customer_assignments.csv").exists() and (s / "segments_summary.json").exists() and (s / "clustering_metrics.json").exists()
+    assert (s.parent / "processed" / "data_quality_report.json").exists() and (r / "correlaciones.json").exists()
+
+
+def test_la_particion_es_80_20(corrida):
+    m = json.loads((corrida["reportes"] / "metrics.json").read_text(encoding="utf-8"))
+    total = m["filas_entrenamiento"] + m["filas_prueba"]
+    assert m["filas_prueba"] / total == pytest.approx(0.20, abs=0.001) and m["test_size"] == 0.2
 
 
 def test_la_matriz_de_experimentos_tiene_los_seis_experimentos(corrida):

@@ -1,5 +1,6 @@
 {
  "semilla": 42,
+ "test_size": 0.2,
  "filas_entrenamiento": 40000,
  "filas_prueba": 10000,
  "limpieza": {
@@ -29,8 +30,8 @@
   "calinski_harabasz_test": 1257.7820163042,
   "tamano_minimo_train": 0.10985,
   "tamano_minimo_test": 0.1051,
-  "tiempo_entrenamiento_s": 1.0793031,
-  "tiempo_inferencia_ms": 0.3315999929,
+  "tiempo_entrenamiento_s": 0.9193141,
+  "tiempo_inferencia_ms": 0.3326000005,
   "diagnostico": "Estable (brecha -0.004)"
  },
  "estabilidad_ari": {
@@ -43,5 +44,5 @@
    "minimo": 0.689003303951499
   }
  },
- "tiempo_total_s": 82.81233970000176
+ "tiempo_total_s": 73.52823649998754
 }

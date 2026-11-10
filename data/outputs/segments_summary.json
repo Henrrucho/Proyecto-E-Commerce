@@ -8,7 +8,7 @@
   "semilla": 42
  },
  "clientes": 50000,
- "tiempo_inferencia_ms": 41.4,
+ "tiempo_inferencia_ms": 34.2,
  "aviso": "Los nombres de grupo describen el reparto; con silueta baja no son grupos naturales de clientes.",
  "grupos": [
   {
