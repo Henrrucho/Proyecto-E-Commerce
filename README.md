@@ -4,7 +4,7 @@ Prototipo de sistema inteligente de segmentación de clientes (50,000 registros 
 
 [![Abrir en Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Henrrucho/Proyecto-E-Commerce/blob/main/notebooks/03_model_training.ipynb)
 
-> **Estado:** Entrega 3 (motor de IA, sin interfaz). Las cifras reales y su explicación están en [`docs/ENTREGA_3.md`](docs/ENTREGA_3.md); los términos técnicos, en [`docs/GLOSARIO_BASICO.md`](docs/GLOSARIO_BASICO.md). El dashboard se conecta a las salidas del modelo en la Entrega 4.
+> **Estado:** Entrega 3 (motor de IA, sin interfaz). Las cifras reales y su explicación están en [`docs/ENTREGA_3.md`](docs/ENTREGA_3.md). El dashboard se conecta a las salidas del modelo en la Entrega 4.
 
 ## Reproducir el entrenamiento (una línea)
 
@@ -27,8 +27,8 @@ models/               Modelos, escaladores y PCA serializados (.joblib)
 reports/              Matriz de experimentos, correlaciones, gráficas y log del entrenamiento
 notebooks/            03_model_training.ipynb (Colab)
 tests/                Pruebas con pytest
-docs/                 Entrega 3 (md, docx, pdf) y glosario básico
-scripts/              Generación del notebook y del documento
+docs/                 ENTREGA_3.md (informe con las cifras reales)
+scripts/              Generación del notebook y del informe
 frontend-dashboard/   Dashboard web (React + Vite + Recharts + Tailwind)
 ai-engine/            Reservada: el motor de IA vive en src/ por la estructura que pide la plantilla de la Entrega 3
 Proyecto_IA_E_Commerce.ipynb   Notebook inicial del equipo

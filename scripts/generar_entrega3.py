@@ -450,8 +450,6 @@ w("   - Conectar el dashboard a `data/outputs/` (reemplazar datos estáticos y n
 w("   - Generar `segments_report.html` (RF-08).")
 w("   - Evaluar la fase 2: catálogo de productos sintético, simulador de comportamiento de 4 clases y clasificador supervisado, declarando que aprende los supuestos del simulador.")
 w("")
-w("Los términos técnicos de este documento (silueta, centroide, algoritmo genético, PCA, etc.) se explican en lenguaje sencillo en `docs/GLOSARIO_BASICO.md`.")
-w("")
 w("## Uso de herramientas de IA")
 w("")
 w(f"El código se elaboró con ayuda de Claude. Para la verificación se ejecutaron {n_pruebas} pruebas, ejecución completa del entrenamiento (el log de la sección 4 es el output real), y una revisión de que cada cifra del documento se genera en `reports/` con `scripts/generar_entrega3.py`.")

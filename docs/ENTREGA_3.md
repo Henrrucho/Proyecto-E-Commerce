@@ -386,7 +386,7 @@ Salida devuelta por el modelo:
  "estatus_alerta": "Normal",
  "modelo": "Algoritmo genético (conjunto B, K=3)",
  "silueta_modelo_test": 0.2526,
- "tiempo_ms": 1.81,
+ "tiempo_ms": 1.75,
  "status": "success"
 }
 ```
@@ -435,8 +435,6 @@ Entrada incompleta (manejo de error):
    - Conectar el dashboard a `data/outputs/` (reemplazar datos estáticos y nombres de grupo) y corregir las cifras mostradas.
    - Generar `segments_report.html` (RF-08).
    - Evaluar la fase 2: catálogo de productos sintético, simulador de comportamiento de 4 clases y clasificador supervisado, declarando que aprende los supuestos del simulador.
-
-Los términos técnicos de este documento (silueta, centroide, algoritmo genético, PCA, etc.) se explican en lenguaje sencillo en `docs/GLOSARIO_BASICO.md`.
 
 ## Uso de herramientas de IA
 
