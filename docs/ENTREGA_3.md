@@ -8,7 +8,7 @@ Fundamentos de Inteligencia Artificial · Proyecto final
 | Nombre del proyecto | E-Commerce AI: Inteligencia Artificial para la gestión y personalización de clientes |
 | Equipo / grupo | LITIID73 |
 | Docente | Ing. Carlos André Castro Rodríguez |
-| Repositorio | https://github.com/AlexRecaman/ecommerce-ai |
+| Repositorio | https://github.com/Henrrucho/Proyecto-E-Commerce |
 
 **Integrantes y roles**
 
@@ -155,19 +155,19 @@ Todos los modelos se evalúan sobre el mismo conjunto de prueba: 10,000 clientes
 | Exp 1: reglas RFM | Reglas RFM (rfm_category) | 5 categorías del dataset · conjunto B | Silueta: 0.030 | Davies-Bouldin: 5.740 | 0.00 s / 0.0 ms | Estructura débil (casi sin grupos naturales); grupo mínimo 2.2 % |
 | Exp 2: aleatoria | Partición aleatoria | K=4, etiquetas al azar · conjunto B | Silueta: -0.005 | Davies-Bouldin: 117.590 | 0.00 s / 0.0 ms | Estructura débil (casi sin grupos naturales) |
 | Exp 3: baseline | K-Means por defecto | K=4, n_init=1 · conjunto B | Silueta: 0.180 | Davies-Bouldin: 1.619 | 0.01 s / 0.4 ms | Estable (brecha +0.001); grupo mínimo 3.8 % |
-| Exp 4: K-Means K=3 | K-Means ajustado | K=3, n_init=10 · conjunto B | Silueta: 0.164 | Davies-Bouldin: 1.954 | 0.07 s / 0.4 ms | Estable (brecha +0.002) |
-| Exp 4: K-Means K=4 | K-Means ajustado | K=4, n_init=10 · conjunto B | Silueta: 0.180 | Davies-Bouldin: 1.619 | 0.09 s / 0.4 ms | Estable (brecha +0.001); grupo mínimo 3.8 % |
-| Exp 4: K-Means K=5 | K-Means ajustado | K=5, n_init=10 · conjunto B | Silueta: 0.188 | Davies-Bouldin: 1.492 | 0.09 s / 0.5 ms | Estable (brecha +0.003); grupo mínimo 3.4 % |
+| Exp 4: K-Means K=3 | K-Means ajustado | K=3, n_init=10 · conjunto B | Silueta: 0.164 | Davies-Bouldin: 1.954 | 0.08 s / 0.4 ms | Estable (brecha +0.002) |
+| Exp 4: K-Means K=4 | K-Means ajustado | K=4, n_init=10 · conjunto B | Silueta: 0.180 | Davies-Bouldin: 1.619 | 0.07 s / 0.4 ms | Estable (brecha +0.001); grupo mínimo 3.8 % |
+| Exp 4: K-Means K=5 | K-Means ajustado | K=5, n_init=10 · conjunto B | Silueta: 0.188 | Davies-Bouldin: 1.492 | 0.08 s / 0.4 ms | Estable (brecha +0.003); grupo mínimo 3.4 % |
 | Exp 5: genético K=3 | Algoritmo genético | K=3, población 40, 60 generaciones, mutación 0.2 · conjunto B | Silueta: 0.253 | Davies-Bouldin: 1.985 | 0.92 s / 0.3 ms | Estable (brecha -0.004) |
-| Exp 5: genético K=4 | Algoritmo genético | K=4, población 40, 60 generaciones, mutación 0.2 · conjunto B | Silueta: 0.170 | Davies-Bouldin: 1.754 | 0.95 s / 0.4 ms | Estable (brecha +0.004) |
-| Exp 5: genético K=5 | Algoritmo genético | K=5, población 40, 60 generaciones, mutación 0.2 · conjunto B | Silueta: 0.163 | Davies-Bouldin: 1.617 | 1.02 s / 0.5 ms | Estable (brecha +0.006) |
-| Exp 6: ajuste | Genético pequeño | K=3, población 20, 30 generaciones, mutación 0.2 · conjunto B | Silueta: 0.169 | Davies-Bouldin: 1.995 | 0.23 s / 0.4 ms | Estable (brecha +0.004) |
-| Exp 6: ajuste | Genético grande | K=3, población 80, 100 generaciones, mutación 0.3 · conjunto B | Silueta: 0.251 | Davies-Bouldin: 1.583 | 3.06 s / 0.4 ms | Estable (brecha -0.004); grupo mínimo 10.0 % |
-| Exp 6: ajuste | Genético híbrido (semilla K-Means++) | K=3, población 40, 60 generaciones, mutación 0.2, semilla K-Means++ · conjunto B | Silueta: 0.248 | Davies-Bouldin: 2.592 | 0.93 s / 0.3 ms | Estable (brecha -0.002) |
+| Exp 5: genético K=4 | Algoritmo genético | K=4, población 40, 60 generaciones, mutación 0.2 · conjunto B | Silueta: 0.170 | Davies-Bouldin: 1.754 | 0.90 s / 0.4 ms | Estable (brecha +0.004) |
+| Exp 5: genético K=5 | Algoritmo genético | K=5, población 40, 60 generaciones, mutación 0.2 · conjunto B | Silueta: 0.163 | Davies-Bouldin: 1.617 | 0.99 s / 0.5 ms | Estable (brecha +0.006) |
+| Exp 6: ajuste | Genético pequeño | K=3, población 20, 30 generaciones, mutación 0.2 · conjunto B | Silueta: 0.169 | Davies-Bouldin: 1.995 | 0.27 s / 0.4 ms | Estable (brecha +0.004) |
+| Exp 6: ajuste | Genético grande | K=3, población 80, 100 generaciones, mutación 0.3 · conjunto B | Silueta: 0.251 | Davies-Bouldin: 1.583 | 3.23 s / 0.4 ms | Estable (brecha -0.004); grupo mínimo 10.0 % |
+| Exp 6: ajuste | Genético híbrido (semilla K-Means++) | K=3, población 40, 60 generaciones, mutación 0.2, semilla K-Means++ · conjunto B | Silueta: 0.248 | Davies-Bouldin: 2.592 | 0.99 s / 0.4 ms | Estable (brecha -0.002) |
 | Exp 4: K-Means, conjunto A (mejor K) | K-Means ajustado | K=3, n_init=10 · conjunto A | Silueta: 0.108 | Davies-Bouldin: 2.560 | 0.08 s / 0.4 ms | Estable (brecha -0.000) |
-| Exp 5: genético, conjunto A (mejor K) | Algoritmo genético | K=3, población 40, 60 generaciones, mutación 0.2 · conjunto A | Silueta: 0.106 | Davies-Bouldin: 2.577 | 0.95 s / 0.4 ms | Estable (brecha -0.002) |
-| Exp 4: K-Means, conjunto C (mejor K) | K-Means ajustado | K=3, n_init=10 · conjunto C | Silueta: 0.167 | Davies-Bouldin: 1.923 | 0.17 s / 0.9 ms | Estable (brecha -0.004); grupo mínimo 4.2 % |
-| Exp 5: genético, conjunto C (mejor K) | Algoritmo genético | K=3, población 40, 60 generaciones, mutación 0.2 · conjunto C | Silueta: 0.152 | Davies-Bouldin: 2.301 | 1.02 s / 0.8 ms | Estable (brecha +0.001) |
+| Exp 5: genético, conjunto A (mejor K) | Algoritmo genético | K=3, población 40, 60 generaciones, mutación 0.2 · conjunto A | Silueta: 0.106 | Davies-Bouldin: 2.577 | 0.94 s / 0.4 ms | Estable (brecha -0.002) |
+| Exp 4: K-Means, conjunto C (mejor K) | K-Means ajustado | K=3, n_init=10 · conjunto C | Silueta: 0.167 | Davies-Bouldin: 1.923 | 0.14 s / 0.8 ms | Estable (brecha -0.004); grupo mínimo 4.2 % |
+| Exp 5: genético, conjunto C (mejor K) | Algoritmo genético | K=3, población 40, 60 generaciones, mutación 0.2 · conjunto C | Silueta: 0.152 | Davies-Bouldin: 2.301 | 1.03 s / 0.8 ms | Estable (brecha +0.001) |
 
 La matriz completa (30 corridas, con Calinski-Harabasz, tamaño mínimo y silueta de entrenamiento) está en `reports/experimentos.csv`.
 
@@ -241,7 +241,7 @@ Composición de cada grupo por frecuencia de compra declarada (porcentaje de sus
 [INFO]   K-Means K=3: silueta train 0.107 | test 0.108
 [INFO]   K-Means K=4: silueta train 0.097 | test 0.094
 [INFO]   K-Means K=5: silueta train 0.099 | test 0.093
-[INFO]   Genético  K=3: silueta train 0.104 | test 0.106 (1.0 s)
+[INFO]   Genético  K=3: silueta train 0.104 | test 0.106 (0.9 s)
 [INFO]   Genético  K=4: silueta train 0.092 | test 0.091 (0.9 s)
 [INFO]   Genético  K=5: silueta train 0.091 | test 0.090 (1.0 s)
 [INFO] Conjunto B (6 conductuales): 6 variables -> 6 componentes PCA (100 % de la varianza)
@@ -249,7 +249,7 @@ Composición de cada grupo por frecuencia de compra declarada (porcentaje de sus
 [INFO]   K-Means K=4: silueta train 0.180 | test 0.180
 [INFO]   K-Means K=5: silueta train 0.191 | test 0.188
 [INFO]   Genético  K=3: silueta train 0.249 | test 0.253 (0.9 s)
-[INFO]   Genético  K=4: silueta train 0.174 | test 0.170 (1.0 s)
+[INFO]   Genético  K=4: silueta train 0.174 | test 0.170 (0.9 s)
 [INFO]   Genético  K=5: silueta train 0.169 | test 0.163 (1.0 s)
 [INFO] Conjunto C (conductuales + categóricas codificadas): 57 variables -> 37 componentes PCA (95 % de la varianza)
 [INFO]   K-Means K=3: silueta train 0.164 | test 0.167
@@ -257,11 +257,11 @@ Composición de cada grupo por frecuencia de compra declarada (porcentaje de sus
 [INFO]   K-Means K=5: silueta train 0.105 | test 0.103
 [INFO]   Genético  K=3: silueta train 0.153 | test 0.152 (1.0 s)
 [INFO]   Genético  K=4: silueta train 0.099 | test 0.098 (1.0 s)
-[INFO]   Genético  K=5: silueta train 0.081 | test 0.077 (1.2 s)
+[INFO]   Genético  K=5: silueta train 0.081 | test 0.077 (1.1 s)
 [INFO] Mejor genético por silueta de entrenamiento: conjunto B, K=3. Se usa para el ajuste del experimento 6.
-[INFO]   Genético pequeño                      silueta train 0.173 | test 0.169 (0.2 s)
-[INFO]   Genético grande                       silueta train 0.247 | test 0.251 (3.1 s)
-[INFO]   Genético híbrido (semilla K-Means++)  silueta train 0.247 | test 0.248 (0.9 s)
+[INFO]   Genético pequeño                      silueta train 0.173 | test 0.169 (0.3 s)
+[INFO]   Genético grande                       silueta train 0.247 | test 0.251 (3.2 s)
+[INFO]   Genético híbrido (semilla K-Means++)  silueta train 0.247 | test 0.248 (1.0 s)
 [INFO] 17 de 24 configuraciones cumplen el tamaño mínimo del 10 % por grupo y pueden ser ganadoras
 [INFO] Modelo ganador por silueta de entrenamiento: Algoritmo genético, conjunto B, K=3 (silueta train 0.249, test 0.253)
 [INFO] Estabilidad K-Means (K=3, B): ARI medio 0.348, mínimo 0.101
@@ -288,7 +288,7 @@ Composición de cada grupo por frecuencia de compra declarada (porcentaje de sus
 [INFO] [SUCCESS] Modelo serializado en: models\modelo_candidato.joblib
 [INFO] [SUCCESS] Escalador y PCA guardados en: models\scaler.joblib
 [INFO] [RESULTADOS EN TEST SET] silueta 0.253 | Davies-Bouldin 1.985 | Calinski-Harabasz 1258 | grupo más pequeño 10.5 %
-[INFO] [SUCCESS] Entrenamiento terminado en 73.9 segundos.
+[INFO] [SUCCESS] Entrenamiento terminado en 73.1 segundos.
 ```
 
 ### B. Gráficas de convergencia y comparación
@@ -386,7 +386,7 @@ Salida devuelta por el modelo:
  "estatus_alerta": "Normal",
  "modelo": "Algoritmo genético (conjunto B, K=3)",
  "silueta_modelo_test": 0.2526,
- "tiempo_ms": 1.82,
+ "tiempo_ms": 1.81,
  "status": "success"
 }
 ```

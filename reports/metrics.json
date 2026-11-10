@@ -30,8 +30,8 @@
   "calinski_harabasz_test": 1257.7820163042,
   "tamano_minimo_train": 0.10985,
   "tamano_minimo_test": 0.1051,
-  "tiempo_entrenamiento_s": 0.9193141,
-  "tiempo_inferencia_ms": 0.3326000005,
+  "tiempo_entrenamiento_s": 0.917902,
+  "tiempo_inferencia_ms": 0.3422000154,
   "diagnostico": "Estable (brecha -0.004)"
  },
  "estabilidad_ari": {
@@ -44,5 +44,5 @@
    "minimo": 0.689003303951499
   }
  },
- "tiempo_total_s": 73.52823649998754
+ "tiempo_total_s": 72.70913890001248
 }

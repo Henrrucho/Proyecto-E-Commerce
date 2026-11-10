@@ -8,7 +8,7 @@
 [INFO]   K-Means K=3: silueta train 0.107 | test 0.108
 [INFO]   K-Means K=4: silueta train 0.097 | test 0.094
 [INFO]   K-Means K=5: silueta train 0.099 | test 0.093
-[INFO]   Genético  K=3: silueta train 0.104 | test 0.106 (1.0 s)
+[INFO]   Genético  K=3: silueta train 0.104 | test 0.106 (0.9 s)
 [INFO]   Genético  K=4: silueta train 0.092 | test 0.091 (0.9 s)
 [INFO]   Genético  K=5: silueta train 0.091 | test 0.090 (1.0 s)
 [INFO] Conjunto B (6 conductuales): 6 variables -> 6 componentes PCA (100 % de la varianza)
@@ -16,7 +16,7 @@
 [INFO]   K-Means K=4: silueta train 0.180 | test 0.180
 [INFO]   K-Means K=5: silueta train 0.191 | test 0.188
 [INFO]   Genético  K=3: silueta train 0.249 | test 0.253 (0.9 s)
-[INFO]   Genético  K=4: silueta train 0.174 | test 0.170 (1.0 s)
+[INFO]   Genético  K=4: silueta train 0.174 | test 0.170 (0.9 s)
 [INFO]   Genético  K=5: silueta train 0.169 | test 0.163 (1.0 s)
 [INFO] Conjunto C (conductuales + categóricas codificadas): 57 variables -> 37 componentes PCA (95 % de la varianza)
 [INFO]   K-Means K=3: silueta train 0.164 | test 0.167
@@ -24,11 +24,11 @@
 [INFO]   K-Means K=5: silueta train 0.105 | test 0.103
 [INFO]   Genético  K=3: silueta train 0.153 | test 0.152 (1.0 s)
 [INFO]   Genético  K=4: silueta train 0.099 | test 0.098 (1.0 s)
-[INFO]   Genético  K=5: silueta train 0.081 | test 0.077 (1.2 s)
+[INFO]   Genético  K=5: silueta train 0.081 | test 0.077 (1.1 s)
 [INFO] Mejor genético por silueta de entrenamiento: conjunto B, K=3. Se usa para el ajuste del experimento 6.
-[INFO]   Genético pequeño                      silueta train 0.173 | test 0.169 (0.2 s)
-[INFO]   Genético grande                       silueta train 0.247 | test 0.251 (3.1 s)
-[INFO]   Genético híbrido (semilla K-Means++)  silueta train 0.247 | test 0.248 (0.9 s)
+[INFO]   Genético pequeño                      silueta train 0.173 | test 0.169 (0.3 s)
+[INFO]   Genético grande                       silueta train 0.247 | test 0.251 (3.2 s)
+[INFO]   Genético híbrido (semilla K-Means++)  silueta train 0.247 | test 0.248 (1.0 s)
 [INFO] 17 de 24 configuraciones cumplen el tamaño mínimo del 10 % por grupo y pueden ser ganadoras
 [INFO] Modelo ganador por silueta de entrenamiento: Algoritmo genético, conjunto B, K=3 (silueta train 0.249, test 0.253)
 [INFO] Estabilidad K-Means (K=3, B): ARI medio 0.348, mínimo 0.101
@@ -55,4 +55,4 @@
 [INFO] [SUCCESS] Modelo serializado en: models\modelo_candidato.joblib
 [INFO] [SUCCESS] Escalador y PCA guardados en: models\scaler.joblib
 [INFO] [RESULTADOS EN TEST SET] silueta 0.253 | Davies-Bouldin 1.985 | Calinski-Harabasz 1258 | grupo más pequeño 10.5 %
-[INFO] [SUCCESS] Entrenamiento terminado en 73.9 segundos.
+[INFO] [SUCCESS] Entrenamiento terminado en 73.1 segundos.

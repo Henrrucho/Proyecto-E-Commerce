@@ -4,7 +4,7 @@ from pathlib import Path
 import nbformat as nbf
 
 RAIZ = Path(__file__).resolve().parents[1]
-REPO = "https://github.com/AlexRecaman/ecommerce-ai"
+REPO = "https://github.com/Henrrucho/Proyecto-E-Commerce"
 
 celdas = [
     nbf.v4.new_markdown_cell(
@@ -23,7 +23,7 @@ celdas = [
         "        os.chdir('..')\n"
         "    else:\n"
         f"        subprocess.run(['git', 'clone', '{REPO}'], check=True)\n"
-        "        os.chdir('ecommerce-ai')\n"
+        "        os.chdir('Proyecto-E-Commerce')\n"
         "if 'google.colab' in sys.modules:\n"
         "    subprocess.run([sys.executable, '-m', 'pip', 'install', '-q', '-r', 'requirements.txt'], check=True)\n"
         "print('Directorio de trabajo:', os.getcwd())"
