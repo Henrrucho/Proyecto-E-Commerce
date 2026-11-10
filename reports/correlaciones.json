@@ -1,0 +1,27 @@
+{
+ "filas": 50000,
+ "variables_numericas": [
+  "age",
+  "tenure_months",
+  "total_purchases",
+  "avg_order_value_usd",
+  "days_since_last_purchase",
+  "return_count",
+  "complaint_count",
+  "satisfaction_score"
+ ],
+ "pearson_max_abs": 0.009960887947157307,
+ "pearson_max_par": [
+  "return_count",
+  "satisfaction_score"
+ ],
+ "spearman_max_abs": 0.009964291683323065,
+ "ruido_esperado_pearson": 0.00447213595499958,
+ "eta_max": 0.9186012231191887,
+ "eta_max_par": [
+  "purchase_frequency",
+  "recencia_dias"
+ ],
+ "eta_max_esperado_por_azar": 0.008944361354059922,
+ "pares_categoria_variable": 66
+}

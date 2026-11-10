@@ -1,0 +1,875 @@
+{
+ "gender": {
+  "Female": 0.50162,
+  "Male": 0.49838
+ },
+ "income_bracket": {
+  "0-25K": 0.16878,
+  "100K-150K": 0.1682,
+  "150K+": 0.16722,
+  "50K-75K": 0.16714,
+  "25K-50K": 0.16442,
+  "75K-100K": 0.16424
+ },
+ "education_level": {
+  "Bachelors": 0.2007,
+  "High School": 0.20056,
+  "Professional": 0.2001,
+  "PhD": 0.19946,
+  "Masters": 0.19918
+ },
+ "employment_type": {
+  "Self-Employed": 0.20244,
+  "Employed": 0.20114,
+  "Unemployed": 0.20108,
+  "Retired": 0.19932,
+  "Student": 0.19602
+ },
+ "marital_status": {
+  "Widowed": 0.25134,
+  "Single": 0.25016,
+  "Married": 0.25002,
+  "Divorced": 0.24848
+ },
+ "shopping_channel": {
+  "Online": 0.25174,
+  "Mobile App": 0.25084,
+  "In-Store": 0.2507,
+  "Marketplace": 0.24672
+ },
+ "device_used": {
+  "Desktop": 0.2549,
+  "Multiple": 0.24938,
+  "Tablet": 0.24796,
+  "Mobile": 0.24776
+ },
+ "payment_method": {
+  "Debit Card": 0.2018,
+  "Bank Transfer": 0.20102,
+  "Credit Card": 0.20092,
+  "Cash on Delivery": 0.20054,
+  "Digital Wallet": 0.19572
+ },
+ "purchase_frequency": {
+  "Rarely": 0.20368,
+  "Daily": 0.20054,
+  "Quarterly": 0.19954,
+  "Monthly": 0.19856,
+  "Weekly": 0.19768
+ },
+ "customer_segment": {
+  "Consumer": 0.45014,
+  "Premium": 0.24846,
+  "Small Business": 0.19958,
+  "Enterprise": 0.10182
+ },
+ "preferred_category_1": {
+  "Grocery": 0.08564,
+  "Automotive": 0.08436,
+  "Sports & Fitness": 0.08418,
+  "Fashion": 0.0841,
+  "Home & Kitchen": 0.0841,
+  "Books": 0.0833,
+  "Electronics": 0.08304,
+  "Office Supplies": 0.08258,
+  "Health & Personal Care": 0.08254,
+  "Pet Supplies": 0.08226,
+  "Toys": 0.08224,
+  "Beauty": 0.08166
+ },
+ "country_city": [
+  [
+   "Australia",
+   "Adelaide",
+   0.00574
+  ],
+  [
+   "Australia",
+   "Brisbane",
+   0.0057
+  ],
+  [
+   "Australia",
+   "Canberra",
+   0.00502
+  ],
+  [
+   "Australia",
+   "Gold Coast",
+   0.00564
+  ],
+  [
+   "Australia",
+   "Hobart",
+   0.0057
+  ],
+  [
+   "Australia",
+   "Melbourne",
+   0.00592
+  ],
+  [
+   "Australia",
+   "Newcastle",
+   0.0064
+  ],
+  [
+   "Australia",
+   "Perth",
+   0.006
+  ],
+  [
+   "Australia",
+   "Sydney",
+   0.00624
+  ],
+  [
+   "Australia",
+   "Wollongong",
+   0.00592
+  ],
+  [
+   "Brazil",
+   "Belo Horizonte",
+   0.00542
+  ],
+  [
+   "Brazil",
+   "Brasilia",
+   0.00606
+  ],
+  [
+   "Brazil",
+   "Curitiba",
+   0.00644
+  ],
+  [
+   "Brazil",
+   "Fortaleza",
+   0.00594
+  ],
+  [
+   "Brazil",
+   "Manaus",
+   0.00524
+  ],
+  [
+   "Brazil",
+   "Porto Alegre",
+   0.00578
+  ],
+  [
+   "Brazil",
+   "Recife",
+   0.00554
+  ],
+  [
+   "Brazil",
+   "Rio de Janeiro",
+   0.00592
+  ],
+  [
+   "Brazil",
+   "Salvador",
+   0.00602
+  ],
+  [
+   "Brazil",
+   "Sao Paulo",
+   0.00554
+  ],
+  [
+   "Canada",
+   "Calgary",
+   0.0056
+  ],
+  [
+   "Canada",
+   "Edmonton",
+   0.00608
+  ],
+  [
+   "Canada",
+   "Halifax",
+   0.00598
+  ],
+  [
+   "Canada",
+   "Hamilton",
+   0.00548
+  ],
+  [
+   "Canada",
+   "Montreal",
+   0.00568
+  ],
+  [
+   "Canada",
+   "Ottawa",
+   0.0056
+  ],
+  [
+   "Canada",
+   "Quebec City",
+   0.006
+  ],
+  [
+   "Canada",
+   "Toronto",
+   0.0063
+  ],
+  [
+   "Canada",
+   "Vancouver",
+   0.00626
+  ],
+  [
+   "Canada",
+   "Winnipeg",
+   0.00578
+  ],
+  [
+   "France",
+   "Bordeaux",
+   0.00542
+  ],
+  [
+   "France",
+   "Lille",
+   0.00558
+  ],
+  [
+   "France",
+   "Lyon",
+   0.0058
+  ],
+  [
+   "France",
+   "Marseille",
+   0.0054
+  ],
+  [
+   "France",
+   "Montpellier",
+   0.00542
+  ],
+  [
+   "France",
+   "Nantes",
+   0.00608
+  ],
+  [
+   "France",
+   "Nice",
+   0.0062
+  ],
+  [
+   "France",
+   "Paris",
+   0.0062
+  ],
+  [
+   "France",
+   "Strasbourg",
+   0.00626
+  ],
+  [
+   "France",
+   "Toulouse",
+   0.00536
+  ],
+  [
+   "Germany",
+   "Berlin",
+   0.00582
+  ],
+  [
+   "Germany",
+   "Cologne",
+   0.0057
+  ],
+  [
+   "Germany",
+   "Dortmund",
+   0.00578
+  ],
+  [
+   "Germany",
+   "Dusseldorf",
+   0.00584
+  ],
+  [
+   "Germany",
+   "Essen",
+   0.0062
+  ],
+  [
+   "Germany",
+   "Frankfurt",
+   0.00572
+  ],
+  [
+   "Germany",
+   "Hamburg",
+   0.00582
+  ],
+  [
+   "Germany",
+   "Leipzig",
+   0.00564
+  ],
+  [
+   "Germany",
+   "Munich",
+   0.00624
+  ],
+  [
+   "Germany",
+   "Stuttgart",
+   0.00614
+  ],
+  [
+   "India",
+   "Ahmedabad",
+   0.00526
+  ],
+  [
+   "India",
+   "Bangalore",
+   0.0059
+  ],
+  [
+   "India",
+   "Chennai",
+   0.00608
+  ],
+  [
+   "India",
+   "Delhi",
+   0.00612
+  ],
+  [
+   "India",
+   "Hyderabad",
+   0.006
+  ],
+  [
+   "India",
+   "Jaipur",
+   0.00586
+  ],
+  [
+   "India",
+   "Kolkata",
+   0.00554
+  ],
+  [
+   "India",
+   "Lucknow",
+   0.00534
+  ],
+  [
+   "India",
+   "Mumbai",
+   0.00612
+  ],
+  [
+   "India",
+   "Pune",
+   0.00606
+  ],
+  [
+   "Italy",
+   "Bari",
+   0.00636
+  ],
+  [
+   "Italy",
+   "Bologna",
+   0.0058
+  ],
+  [
+   "Italy",
+   "Catania",
+   0.00624
+  ],
+  [
+   "Italy",
+   "Florence",
+   0.00568
+  ],
+  [
+   "Italy",
+   "Genoa",
+   0.00638
+  ],
+  [
+   "Italy",
+   "Milan",
+   0.00634
+  ],
+  [
+   "Italy",
+   "Naples",
+   0.00594
+  ],
+  [
+   "Italy",
+   "Palermo",
+   0.00584
+  ],
+  [
+   "Italy",
+   "Rome",
+   0.00568
+  ],
+  [
+   "Italy",
+   "Turin",
+   0.00546
+  ],
+  [
+   "Japan",
+   "Fukuoka",
+   0.00522
+  ],
+  [
+   "Japan",
+   "Hiroshima",
+   0.0055
+  ],
+  [
+   "Japan",
+   "Kawasaki",
+   0.00586
+  ],
+  [
+   "Japan",
+   "Kobe",
+   0.0055
+  ],
+  [
+   "Japan",
+   "Kyoto",
+   0.00618
+  ],
+  [
+   "Japan",
+   "Nagoya",
+   0.00568
+  ],
+  [
+   "Japan",
+   "Osaka",
+   0.00566
+  ],
+  [
+   "Japan",
+   "Saitama",
+   0.0058
+  ],
+  [
+   "Japan",
+   "Sapporo",
+   0.00576
+  ],
+  [
+   "Japan",
+   "Tokyo",
+   0.00636
+  ],
+  [
+   "Mexico",
+   "Cancun",
+   0.0057
+  ],
+  [
+   "Mexico",
+   "Guadalajara",
+   0.0053
+  ],
+  [
+   "Mexico",
+   "Leon",
+   0.00598
+  ],
+  [
+   "Mexico",
+   "Merida",
+   0.00626
+  ],
+  [
+   "Mexico",
+   "Mexico City",
+   0.00612
+  ],
+  [
+   "Mexico",
+   "Monterrey",
+   0.00562
+  ],
+  [
+   "Mexico",
+   "Puebla",
+   0.0061
+  ],
+  [
+   "Mexico",
+   "Queretaro",
+   0.00612
+  ],
+  [
+   "Mexico",
+   "San Luis Potosi",
+   0.00644
+  ],
+  [
+   "Mexico",
+   "Tijuana",
+   0.00588
+  ],
+  [
+   "Netherlands",
+   "Almere",
+   0.00584
+  ],
+  [
+   "Netherlands",
+   "Amsterdam",
+   0.00592
+  ],
+  [
+   "Netherlands",
+   "Breda",
+   0.00636
+  ],
+  [
+   "Netherlands",
+   "Eindhoven",
+   0.00564
+  ],
+  [
+   "Netherlands",
+   "Groningen",
+   0.00568
+  ],
+  [
+   "Netherlands",
+   "Nijmegen",
+   0.00572
+  ],
+  [
+   "Netherlands",
+   "Rotterdam",
+   0.00524
+  ],
+  [
+   "Netherlands",
+   "The Hague",
+   0.00576
+  ],
+  [
+   "Netherlands",
+   "Tilburg",
+   0.0052
+  ],
+  [
+   "Netherlands",
+   "Utrecht",
+   0.00564
+  ],
+  [
+   "Pakistan",
+   "Faisalabad",
+   0.00632
+  ],
+  [
+   "Pakistan",
+   "Gujranwala",
+   0.0059
+  ],
+  [
+   "Pakistan",
+   "Islamabad",
+   0.00608
+  ],
+  [
+   "Pakistan",
+   "Karachi",
+   0.00564
+  ],
+  [
+   "Pakistan",
+   "Lahore",
+   0.0058
+  ],
+  [
+   "Pakistan",
+   "Multan",
+   0.00568
+  ],
+  [
+   "Pakistan",
+   "Peshawar",
+   0.00584
+  ],
+  [
+   "Pakistan",
+   "Quetta",
+   0.0063
+  ],
+  [
+   "Pakistan",
+   "Rawalpindi",
+   0.00636
+  ],
+  [
+   "Pakistan",
+   "Sialkot",
+   0.00616
+  ],
+  [
+   "Saudi Arabia",
+   "Buraidah",
+   0.00602
+  ],
+  [
+   "Saudi Arabia",
+   "Dammam",
+   0.00576
+  ],
+  [
+   "Saudi Arabia",
+   "Dhahran",
+   0.00614
+  ],
+  [
+   "Saudi Arabia",
+   "Jeddah",
+   0.0059
+  ],
+  [
+   "Saudi Arabia",
+   "Khamis Mushait",
+   0.00566
+  ],
+  [
+   "Saudi Arabia",
+   "Khobar",
+   0.00628
+  ],
+  [
+   "Saudi Arabia",
+   "Mecca",
+   0.00522
+  ],
+  [
+   "Saudi Arabia",
+   "Medina",
+   0.00624
+  ],
+  [
+   "Saudi Arabia",
+   "Riyadh",
+   0.0061
+  ],
+  [
+   "Saudi Arabia",
+   "Tabuk",
+   0.00562
+  ],
+  [
+   "Singapore",
+   "Singapore",
+   0.06006
+  ],
+  [
+   "Spain",
+   "Barcelona",
+   0.00612
+  ],
+  [
+   "Spain",
+   "Bilbao",
+   0.00636
+  ],
+  [
+   "Spain",
+   "Las Palmas",
+   0.0062
+  ],
+  [
+   "Spain",
+   "Madrid",
+   0.00588
+  ],
+  [
+   "Spain",
+   "Malaga",
+   0.00574
+  ],
+  [
+   "Spain",
+   "Murcia",
+   0.00542
+  ],
+  [
+   "Spain",
+   "Palma",
+   0.00552
+  ],
+  [
+   "Spain",
+   "Seville",
+   0.00564
+  ],
+  [
+   "Spain",
+   "Valencia",
+   0.00612
+  ],
+  [
+   "Spain",
+   "Zaragoza",
+   0.00588
+  ],
+  [
+   "United Arab Emirates",
+   "Abu Dhabi",
+   0.00902
+  ],
+  [
+   "United Arab Emirates",
+   "Ajman",
+   0.0087
+  ],
+  [
+   "United Arab Emirates",
+   "Dubai",
+   0.00824
+  ],
+  [
+   "United Arab Emirates",
+   "Fujairah",
+   0.0082
+  ],
+  [
+   "United Arab Emirates",
+   "Ras Al Khaimah",
+   0.0076
+  ],
+  [
+   "United Arab Emirates",
+   "Sharjah",
+   0.00886
+  ],
+  [
+   "United Arab Emirates",
+   "Umm Al Quwain",
+   0.0084
+  ],
+  [
+   "United Kingdom",
+   "Birmingham",
+   0.00646
+  ],
+  [
+   "United Kingdom",
+   "Bristol",
+   0.00568
+  ],
+  [
+   "United Kingdom",
+   "Edinburgh",
+   0.00618
+  ],
+  [
+   "United Kingdom",
+   "Glasgow",
+   0.00598
+  ],
+  [
+   "United Kingdom",
+   "Leeds",
+   0.00566
+  ],
+  [
+   "United Kingdom",
+   "Liverpool",
+   0.00556
+  ],
+  [
+   "United Kingdom",
+   "London",
+   0.00572
+  ],
+  [
+   "United Kingdom",
+   "Manchester",
+   0.00586
+  ],
+  [
+   "United Kingdom",
+   "Newcastle",
+   0.00628
+  ],
+  [
+   "United Kingdom",
+   "Sheffield",
+   0.0059
+  ],
+  [
+   "United States",
+   "Chicago",
+   0.0055
+  ],
+  [
+   "United States",
+   "Dallas",
+   0.00622
+  ],
+  [
+   "United States",
+   "Houston",
+   0.00676
+  ],
+  [
+   "United States",
+   "Los Angeles",
+   0.00582
+  ],
+  [
+   "United States",
+   "New York",
+   0.00564
+  ],
+  [
+   "United States",
+   "Philadelphia",
+   0.00614
+  ],
+  [
+   "United States",
+   "Phoenix",
+   0.0061
+  ],
+  [
+   "United States",
+   "San Antonio",
+   0.00588
+  ],
+  [
+   "United States",
+   "San Diego",
+   0.00604
+  ],
+  [
+   "United States",
+   "San Jose",
+   0.00604
+  ]
+ ],
+ "p_cat2": 0.66514,
+ "p_cat3_dado_cat2": 0.5034428842048291,
+ "p_social": 0.7516
+}

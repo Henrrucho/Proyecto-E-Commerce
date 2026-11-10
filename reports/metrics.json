@@ -1,0 +1,48 @@
+{
+ "semilla": 42,
+ "test_size": 0.2,
+ "filas_entrenamiento": 40000,
+ "filas_prueba": 10000,
+ "limpieza": {
+  "filas_iniciales": 50000,
+  "columnas": 53,
+  "duplicados_eliminados": 0,
+  "nulos_imputados": {
+   "preferred_category_2": 16743,
+   "preferred_category_3": 33257,
+   "social_media_presence": 12420,
+   "loyalty_tier": 1272
+  },
+  "nulos_restantes": 0,
+  "filas_finales": 50000,
+  "columnas_derivadas_excluidas": 24,
+  "columnas_sin_valor_excluidas": 4
+ },
+ "ganador": {
+  "exp": 5,
+  "modelo": "Algoritmo genético",
+  "conjunto": "B",
+  "k": 3,
+  "hiperparametros": "{\"k\": 3, \"poblacion\": 40, \"generaciones\": 60, \"torneo\": 3, \"p_cruce\": 0.9, \"p_mutacion\": 0.2, \"p_reubicacion\": 0.02, \"sigma_inicial\": 0.5, \"sigma_final\": 0.05, \"elitismo\": 2, \"tamano_minimo\": 0.12, \"muestra\": 1000, \"init\": \"aleatorio\"}",
+  "silueta_train": 0.2490415146,
+  "silueta_test": 0.2525731728,
+  "davies_bouldin_test": 1.9848493218,
+  "calinski_harabasz_test": 1257.7820163042,
+  "tamano_minimo_train": 0.10985,
+  "tamano_minimo_test": 0.1051,
+  "tiempo_entrenamiento_s": 0.917902,
+  "tiempo_inferencia_ms": 0.3422000154,
+  "diagnostico": "Estable (brecha -0.004)"
+ },
+ "estabilidad_ari": {
+  "K-Means": {
+   "medio": 0.3481116087618825,
+   "minimo": 0.10087663075983076
+  },
+  "Algoritmo genético": {
+   "medio": 0.7555674945557621,
+   "minimo": 0.689003303951499
+  }
+ },
+ "tiempo_total_s": 72.70913890001248
+}
