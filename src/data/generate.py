@@ -6,7 +6,7 @@ Uso:
 
 Sin --seed se elige una semilla al azar, se imprime y queda en el nombre del archivo, de modo que
 cualquier corrida se puede repetir. Con --estructura 0 cada columna se sortea por separado (como en
-el dataset original, donde las variables son independientes). Con valores mayores, esa fracción de
+el dataset original: sus variables numéricas son independientes y solo hay una relación fuerte, frecuencia de compra -> días sin comprar). Con valores mayores, esa fracción de
 los clientes sigue un arquetipo (grupos de rasgos que van juntos). El arquetipo de cada cliente NO se
 escribe en el CSV: va en un archivo aparte (*_arquetipos.csv) para poder calificar al modelo después.
 """
@@ -55,6 +55,16 @@ def _elegir(rng, tabla, n):
     return rng.choice(valores, size=n, p=probs / probs.sum())
 
 
+# En el dataset original los días desde la última compra salen de bandas según la frecuencia declarada
+# (relación fuerte, eta = 0.92 en el diagnóstico). Se reproduce para que estructura = 0 sea fiel al original.
+FRECUENCIA_DIAS = {"Daily": (0, 1), "Weekly": (1, 7), "Monthly": (8, 30), "Quarterly": (31, 90), "Rarely": (91, 365)}
+
+
+def frecuencia_desde_dias(dias):
+    dias = np.asarray(dias)
+    return np.select([dias <= 0, dias <= 7, dias <= 30, dias <= 90], ["Daily", "Weekly", "Monthly", "Quarterly"], default="Rarely").astype(object)
+
+
 # Cada arquetipo fija rangos de las variables conductuales y favorece a algunas categorías.
 ARQUETIPOS = {
     "leal_frecuente": dict(tenure=(40, 119), purchases=(110, 199), aov=(300, 1000), days=(0, 20), returns=(0, 6), complaints=(0, 4),
@@ -85,7 +95,9 @@ def _aplicar_arquetipos(df, rng, estructura, perfil):
         df.loc[idx, "tenure_months"] = rng.integers(a["tenure"][0], a["tenure"][1] + 1, m)
         df.loc[idx, "total_purchases"] = rng.integers(a["purchases"][0], a["purchases"][1] + 1, m)
         df.loc[idx, "avg_order_value_usd"] = rng.uniform(a["aov"][0], a["aov"][1], m).round(2)
-        df.loc[idx, "days_since_last_purchase"] = rng.integers(a["days"][0], a["days"][1] + 1, m)
+        dias = rng.integers(a["days"][0], a["days"][1] + 1, m)
+        df.loc[idx, "days_since_last_purchase"] = dias
+        df.loc[idx, "purchase_frequency"] = frecuencia_desde_dias(dias)  # se mantiene la relación frecuencia-recencia
         df.loc[idx, "return_count"] = rng.integers(a["returns"][0], a["returns"][1] + 1, m)
         df.loc[idx, "complaint_count"] = rng.integers(a["complaints"][0], a["complaints"][1] + 1, m)
         df.loc[idx, "satisfaction_score"] = rng.choice(a["satisfaction"], m)
@@ -119,10 +131,8 @@ def generar(filas, semilla=None, estructura=0.0):
     df["tenure_months"] = rng.integers(1, 120, n)
     df["total_purchases"] = rng.integers(0, 200, n)
     df["avg_order_value_usd"] = rng.uniform(10, 1000, n).round(2)
-    df["days_since_last_purchase"] = rng.choice([0, 1], n)  # se reemplaza abajo
-    bins = [(0, 30, 0.5968), (31, 60, 0.0998), (61, 90, 0.0998), (91, 180, 0.0681), (181, 365, 0.1356)]
-    cual = rng.choice(len(bins), size=n, p=np.array([b[2] for b in bins]) / sum(b[2] for b in bins))
-    df["days_since_last_purchase"] = [int(rng.integers(bins[c][0], bins[c][1] + 1)) for c in cual]
+    rangos = np.array([FRECUENCIA_DIAS[f] for f in df["purchase_frequency"]])
+    df["days_since_last_purchase"] = rng.integers(rangos[:, 0], rangos[:, 1] + 1)
     df["return_count"] = rng.integers(0, 20, n)
     df["complaint_count"] = rng.integers(0, 15, n)
     df["satisfaction_score"] = rng.integers(1, 6, n)

@@ -34,6 +34,14 @@ def test_sin_estructura_variables_independientes():
     assert np.max(c[np.triu_indices(4, k=1)]) < 0.06
 
 
+def test_se_conserva_la_relacion_frecuencia_recencia_del_original():
+    from src.data import diagnostico
+    df, _ = generate.generar(6000, semilla=8, estructura=0)
+    assert diagnostico.razon_correlacion(df.purchase_frequency, df.days_since_last_purchase) > 0.9
+    con, _ = generate.generar(6000, semilla=8, estructura=1.0)
+    assert (generate.frecuencia_desde_dias(con.days_since_last_purchase) == con.purchase_frequency).mean() > 0.99
+
+
 def test_con_estructura_aparecen_grupos_y_el_csv_no_trae_la_etiqueta():
     df, arq = generate.generar(3000, semilla=3, estructura=1.0)
     assert "arquetipo" not in df.columns
