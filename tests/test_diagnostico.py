@@ -11,11 +11,14 @@ def test_razon_de_correlacion_en_los_extremos():
     assert diagnostico.razon_correlacion(rng.choice(["a", "b", "c"], 30000), rng.normal(size=30000)) < 0.03
 
 
-def test_datos_independientes_tienen_correlaciones_de_ruido():
+def test_datos_sin_estructura_solo_tienen_la_relacion_frecuencia_recencia():
     df, _ = generate.generar(20000, semilla=1, estructura=0)
-    r = diagnostico.diagnosticar(preprocess.limpiar(df)[0])["resumen"]
-    assert r["pearson_max_abs"] < 5 * r["ruido_esperado_pearson"]
-    assert r["eta_max"] < 3 * r["eta_max_esperado_por_azar"] + 0.02
+    dx = diagnostico.diagnosticar(preprocess.limpiar(df)[0])
+    r, etas = dx["resumen"], dx["etas"]
+    assert r["pearson_max_abs"] < 5 * r["ruido_esperado_pearson"]  # las 8 numéricas son independientes
+    assert r["eta_max_par"] == ["purchase_frequency", "recencia_dias"] and r["eta_max"] > 0.9
+    resto = etas[~((etas.categoria == "purchase_frequency") & (etas.variable == "recencia_dias"))]
+    assert resto.eta.max() < 0.08  # ninguna otra categoría explica nada
 
 
 def test_datos_con_estructura_muestran_correlaciones_claras():
