@@ -1,0 +1,4 @@
+grupo,nombre,clientes,porcentaje,days_since_last_purchase,total_purchases,avg_order_value_usd,return_count,complaint_count,satisfaction_score,tenure_months,rasgos_distintivos
+0,Grupo 0: compra hace mucho y pocas quejas,4629,0.115725,281.6336141715273,103.3199395117736,506.5575394253619,9.418664938431627,6.381939943832362,2.9740764744005186,58.78310650248434,"days_since_last_purchase (+2.35 sd), complaint_count (-0.14 sd)"
+1,Grupo 1: pocas compras y muchas devoluciones,4394,0.10985,41.42580791989076,35.94629039599454,582.216775147929,13.005689576695493,8.218707328174784,2.7637687756030953,45.23873463814292,"total_purchases (-1.10 sd), return_count (+0.60 sd)"
+2,Grupo 2: compra reciente y muchas compras,30977,0.774425,33.02882784001033,107.94405526681086,493.83237498789424,9.035122833069696,6.913903864157278,3.0517480711495626,61.84753203990057,"days_since_last_purchase (-0.32 sd), total_purchases (+0.15 sd)"

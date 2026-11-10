@@ -1,0 +1,15 @@
+{
+ "filas_iniciales": 50000,
+ "columnas": 53,
+ "duplicados_eliminados": 0,
+ "nulos_imputados": {
+  "preferred_category_2": 16743,
+  "preferred_category_3": 33257,
+  "social_media_presence": 12420,
+  "loyalty_tier": 1272
+ },
+ "nulos_restantes": 0,
+ "filas_finales": 50000,
+ "columnas_derivadas_excluidas": 24,
+ "columnas_sin_valor_excluidas": 4
+}
