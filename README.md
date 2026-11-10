@@ -31,7 +31,6 @@ docs/                 Entrega 3 (md, docx, pdf) y glosario básico
 scripts/              Generación del notebook y del documento
 frontend-dashboard/   Dashboard web (React + Vite + Recharts + Tailwind)
 ai-engine/            Reservada: el motor de IA vive en src/ por la estructura que pide la plantilla de la Entrega 3
-backend-api/          Sin uso: la Entrega 2 eliminó el servidor intermedio (los datos pasan por archivos en data/outputs/)
 Proyecto_IA_E_Commerce.ipynb   Notebook inicial del equipo
 ```
 
