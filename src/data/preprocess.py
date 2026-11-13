@@ -96,10 +96,13 @@ def construir_features(df, conjunto):
     compras = df["total_purchases"].astype(float)
     base = pd.DataFrame({
         "recencia_dias": df["days_since_last_purchase"].astype(float),
-        # Las dos razones tienen colas muy pesadas (una compra en un mes, 19 devoluciones sobre 1 compra): se usa log(1 + x).
+        # Se aplica log(1 + x) para comprimir valores muy altos en clientes nuevos con muchas compras.
         "log_compras_por_mes": np.log1p(compras / df["tenure_months"].clip(lower=1)),
         "avg_order_value_usd": df["avg_order_value_usd"].astype(float),
-        "log_tasa_devoluciones": np.log1p(df["return_count"] / compras.clip(lower=1)),
+        # Cambio de mejora: antes se dividia entre compras (minimo 1), asi que un cliente con 0 o 1 compra
+        # y varias devoluciones salia con una tasa gigante que distorsionaba las distancias entre clientes.
+        # Sumar 5 compras base en el denominador suaviza esos casos extremos sin afectar a compradores frecuentes.
+        "log_tasa_devoluciones": np.log1p(df["return_count"] / (compras + 5.0)),
         "complaint_count": df["complaint_count"].astype(float),
         "satisfaction_score": df["satisfaction_score"].astype(float),
     }, index=df.index)

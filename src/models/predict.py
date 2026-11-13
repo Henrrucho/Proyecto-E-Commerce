@@ -59,6 +59,40 @@ def predecir_lote(df, ruta_modelo=RUTA_MODELO, ruta_pre=RUTA_PRE):
     return salida
 
 
+def _validar_entrada_numerica(entrada, requeridas):
+    """Comprueba rangos reales del negocio antes de transformar los datos.
+
+    Cambio de mejora: antes solo se verificaba que la columna existiera y no fuera texto, por lo que valores
+    imposibles (dias negativos, antiguedad 0, satisfaccion 99 o booleanos True/False) devolvian status='success'.
+    """
+    reglas_min = {
+        "days_since_last_purchase": 0.0,
+        "total_purchases": 0.0,
+        "tenure_months": 1.0,
+        "avg_order_value_usd": 0.0,
+        "return_count": 0.0,
+        "complaint_count": 0.0,
+        "satisfaction_score": 1.0,
+        "age": 18.0,
+    }
+    for col in requeridas:
+        if col not in reglas_min:
+            continue
+        val = entrada.get(col)
+        if isinstance(val, bool):
+            raise ValueError(f"El campo '{col}' no puede ser booleano.")
+        try:
+            num = float(val)
+        except (TypeError, ValueError) as exc:
+            raise ValueError(f"El campo '{col}' debe ser numerico.") from exc
+        if not np.isfinite(num):
+            raise ValueError(f"El campo '{col}' contiene un valor no finito (NaN o infinito).")
+        if num < reglas_min[col]:
+            raise ValueError(f"El campo '{col}' debe ser >= {reglas_min[col]:g}.")
+        if col == "satisfaction_score" and num > 5.0:
+            raise ValueError("El campo 'satisfaction_score' debe estar entre 1 y 5.")
+
+
 def predecir(entrada, ruta_modelo=RUTA_MODELO, ruta_pre=RUTA_PRE):
     """Recibe un cliente como diccionario plano y devuelve la inferencia estructurada.
 
@@ -74,6 +108,10 @@ def predecir(entrada, ruta_modelo=RUTA_MODELO, ruta_pre=RUTA_PRE):
     faltan = [c for c in requeridas if c not in entrada]
     if faltan:
         return {"status": "error", "mensaje": f"Faltan campos: {faltan}", "campos_requeridos": requeridas}
+    try:
+        _validar_entrada_numerica(entrada, requeridas)
+    except ValueError as e:
+        return {"status": "error", "mensaje": f"Datos inválidos: {e}"}
     registro = {**{c: entrada.get(c) for c in ("preferred_category_2", "preferred_category_3", "social_media_presence")}, **entrada}
     for c in ("preferred_category_2", "preferred_category_3", "social_media_presence"):
         registro[c] = registro[c] if registro[c] else "None"

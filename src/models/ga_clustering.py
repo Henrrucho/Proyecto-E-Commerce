@@ -21,11 +21,11 @@ from src.models.evaluacion import asignar, silueta_con_distancias
 class AGClustering:
     def __init__(self, k=4, poblacion=40, generaciones=60, torneo=3, p_cruce=0.9, p_mutacion=0.2,
                  p_reubicacion=0.02, sigma_inicial=0.5, sigma_final=0.05, elitismo=2,
-                 tamano_minimo=0.12, muestra=1000, init="aleatorio", semilla=42):
+                 tamano_minimo=0.12, tamano_maximo=0.55, muestra=1500, init="hibrido", semilla=42):
         self.k, self.poblacion, self.generaciones, self.torneo = k, poblacion, generaciones, torneo
         self.p_cruce, self.p_mutacion, self.p_reubicacion = p_cruce, p_mutacion, p_reubicacion
         self.sigma_inicial, self.sigma_final, self.elitismo = sigma_inicial, sigma_final, elitismo
-        self.tamano_minimo, self.muestra = tamano_minimo, muestra
+        self.tamano_minimo, self.tamano_maximo, self.muestra = tamano_minimo, tamano_maximo, muestra
         self.init, self.semilla = init, semilla
         self.centroides_ = None
         self.historial_ = None
@@ -35,25 +35,31 @@ class AGClustering:
         return {"k": self.k, "poblacion": self.poblacion, "generaciones": self.generaciones, "torneo": self.torneo,
                 "p_cruce": self.p_cruce, "p_mutacion": self.p_mutacion, "p_reubicacion": self.p_reubicacion,
                 "sigma_inicial": self.sigma_inicial, "sigma_final": self.sigma_final, "elitismo": self.elitismo,
-                "tamano_minimo": self.tamano_minimo, "muestra": self.muestra, "init": self.init, "semilla": self.semilla}
+                "tamano_minimo": self.tamano_minimo, "tamano_maximo": self.tamano_maximo,
+                "muestra": self.muestra, "init": self.init, "semilla": self.semilla}
 
     # ------------------------------------------------------------ aptitud
     def _aptitud(self, centroides):
         etiquetas = cdist(self._S, centroides).argmin(axis=1)
-        s, frac = silueta_con_distancias(self._D, etiquetas, self.k)
+        s, frac_min = silueta_con_distancias(self._D, etiquetas, self.k)
         if s == -1.0:
             return -1.0
-        deficit = max(0.0, self.tamano_minimo - frac)
+        frac_max = float(np.bincount(etiquetas, minlength=self.k).max() / len(etiquetas))
+        # Cambio de mejora: ademas del piso minimo (12 %), se agrega un tope maximo por grupo (55 % por defecto).
+        # Sin este tope, el algoritmo descubria un atajo: dejaba dos grupos pequeños en los extremos (~11 % c/u)
+        # y metia a casi el 78 % de clientes en un solo bloque gigante para subir la silueta artificialmente.
+        exceso = max(0.0, frac_max - self.tamano_maximo) if self.tamano_maximo is not None else 0.0
+        deficit = max(0.0, self.tamano_minimo - frac_min) + exceso
         if deficit > 0:
-            # Regla de Deb: una partición que incumple el tamaño mínimo siempre pierde contra una que lo cumple
-            # (la silueta de las viables es >= -1) y entre inviables gana la que menos incumple. Sin esto, el
-            # algoritmo aprendió a aislar unos pocos valores atípicos en un grupo diminuto para inflar la silueta.
+            # Regla de Deb: cualquier reparto desbalanceado pierde contra uno valido, y entre invalidos gana el menos malo.
             return -1.0 - deficit
         return s
 
     # ------------------------------------------------------------ operadores
     def _inicial(self, rng):
-        if self.init == "kmeans++":
+        # Cambio de mejora: la inicializacion "hibrida" arranca ~35 % de la poblacion con centroides bien repartidos
+        # (kmeans++) y el resto aleatorios; esto ayuda a que con K=4 y K=5 converja mejor sin perder exploracion.
+        if self.init == "kmeans++" or (self.init == "hibrido" and rng.random() < 0.35):
             return kmeans_plusplus(self._S, self.k, random_state=int(rng.integers(1 << 30)))[0]
         idx = rng.choice(len(self._S), self.k, replace=False)
         return self._S[idx] + rng.normal(0, 0.05, (self.k, self._S.shape[1])) * self._escala

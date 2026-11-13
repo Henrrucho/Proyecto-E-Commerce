@@ -85,8 +85,13 @@ def evaluar_modelo(exp, nombre, conjunto, modelo, Ztr, Zte, semilla):
     return {
         "exp": exp, "modelo": nombre, "conjunto": conjunto, "k": modelo.k,
         "hiperparametros": json.dumps({k: v for k, v in modelo.parametros.items() if k != "semilla"}, ensure_ascii=False),
-        "silueta_train": mtr["silueta"], "silueta_test": mte["silueta"], "davies_bouldin_test": mte["davies_bouldin"],
-        "calinski_harabasz_test": mte["calinski_harabasz"], "tamano_minimo_train": mtr["tamano_minimo_pct"], "tamano_minimo_test": mte["tamano_minimo_pct"],
+        "silueta_train": mtr["silueta"], "silueta_test": mte["silueta"],
+        # Cambio de mejora: se guardan Davies-Bouldin, Calinski-Harabasz y tamaño maximo tambien en entrenamiento
+        # para elegir K y al ganador sin mirar el conjunto de prueba.
+        "davies_bouldin_train": mtr["davies_bouldin"], "davies_bouldin_test": mte["davies_bouldin"],
+        "calinski_harabasz_train": mtr["calinski_harabasz"], "calinski_harabasz_test": mte["calinski_harabasz"],
+        "tamano_minimo_train": mtr["tamano_minimo_pct"], "tamano_minimo_test": mte["tamano_minimo_pct"],
+        "tamano_maximo_train": mtr["tamano_maximo_pct"], "tamano_maximo_test": mte["tamano_maximo_pct"],
         "tiempo_entrenamiento_s": modelo.tiempo_entrenamiento_, "tiempo_inferencia_ms": infer_ms,
         "diagnostico": evaluacion.diagnostico(mtr["silueta"], mte["silueta"]),
     }
@@ -97,8 +102,11 @@ def evaluar_etiquetas(exp, nombre, conjunto, ytr, yte, Ztr, Zte, semilla, detall
     mtr, mte = evaluacion.metricas(Ztr, ytr, semilla), evaluacion.metricas(Zte, yte, semilla)
     return {
         "exp": exp, "modelo": nombre, "conjunto": conjunto, "k": mte["n_grupos"], "hiperparametros": detalle,
-        "silueta_train": mtr["silueta"], "silueta_test": mte["silueta"], "davies_bouldin_test": mte["davies_bouldin"],
-        "calinski_harabasz_test": mte["calinski_harabasz"], "tamano_minimo_train": mtr["tamano_minimo_pct"], "tamano_minimo_test": mte["tamano_minimo_pct"],
+        "silueta_train": mtr["silueta"], "silueta_test": mte["silueta"],
+        "davies_bouldin_train": mtr["davies_bouldin"], "davies_bouldin_test": mte["davies_bouldin"],
+        "calinski_harabasz_train": mtr["calinski_harabasz"], "calinski_harabasz_test": mte["calinski_harabasz"],
+        "tamano_minimo_train": mtr["tamano_minimo_pct"], "tamano_minimo_test": mte["tamano_minimo_pct"],
+        "tamano_maximo_train": mtr["tamano_maximo_pct"], "tamano_maximo_test": mte["tamano_maximo_pct"],
         "tiempo_entrenamiento_s": 0.0, "tiempo_inferencia_ms": 0.0,
         "diagnostico": evaluacion.diagnostico(mtr["silueta"], mte["silueta"]),
     }
@@ -129,6 +137,7 @@ def experimentos_principales(train, test, rapido, semilla):
         filas.append(evaluar_etiquetas(2, "Partición aleatoria", conjunto, rng.integers(0, 4, len(Ztr)), rng.integers(0, 4, len(Zte)),
                                        Ztr, Zte, semilla, "K=4, etiquetas al azar"))
         m = ajustar_kmeans(Ztr, 4, semilla, n_init=1)
+        modelos[("K-Means def", conjunto, 4)] = m
         filas.append(evaluar_modelo(3, "K-Means por defecto", conjunto, m, Ztr, Zte, semilla))
         for k in (3, 4, 5):
             m = ajustar_kmeans(Ztr, k, semilla, n_init=10)
@@ -144,9 +153,9 @@ def experimentos_principales(train, test, rapido, semilla):
 
     tabla = pd.DataFrame(filas)
     ga5 = tabla[tabla.exp == 5]
-    mejor = ga5.loc[ga5.silueta_train.idxmax()]  # el algoritmo genético ya garantiza el tamaño mínimo
+    mejor = evaluacion.seleccionar_mejor_candidato(ga5)
     conjunto, k = mejor.conjunto, int(mejor.k)
-    LOG.info("Mejor genético por silueta de entrenamiento: conjunto %s, K=%d. Se usa para el ajuste del experimento 6.", conjunto, k)
+    LOG.info("Mejor genético por criterio balanceado de entrenamiento: conjunto %s, K=%d. Se usa para el ajuste del experimento 6.", conjunto, k)
     _, Ztr, Zte = espacios[conjunto]
     variantes = {
         "pequeño": dict(poblacion=10 if rapido else 20, generaciones=8 if rapido else 30),
@@ -175,14 +184,20 @@ def robustez(rapido, semilla):
         Ztr, Zte = pre.transform(tr), pre.transform(te)
         verdad = arq.loc[te.customer_id].to_numpy()
         for familia in ("K-Means", "Algoritmo genético"):
-            candidatos = []
+            candidatos, filas_cand = {}, []
             for k in (3, 4, 5):
                 m = ajustar_kmeans(Ztr, k, semilla, 10) if familia == "K-Means" else ajustar_ga(Ztr, k, semilla, **ga_base)
                 mt = evaluacion.metricas(Ztr, m.predict(Ztr), semilla)
-                candidatos.append((mt["silueta"] if mt["tamano_minimo_pct"] >= 0.10 else -1.0, m))
-            _, m = max(candidatos, key=lambda x: x[0])
+                candidatos[k] = m
+                filas_cand.append({
+                    "k": k, "silueta_train": mt["silueta"],
+                    "davies_bouldin_train": mt["davies_bouldin"], "calinski_harabasz_train": mt["calinski_harabasz"],
+                    "tamano_minimo_train": mt["tamano_minimo_pct"], "tamano_maximo_train": mt["tamano_maximo_pct"],
+                })
+            elegido = evaluacion.seleccionar_mejor_candidato(pd.DataFrame(filas_cand))
+            m = candidatos[int(elegido["k"])]
             yte = m.predict(Zte)
-            m5 = next(c[1] for c in candidatos if c[1].k == 5)
+            m5 = candidatos[5]
             estruct = estructura > 0
             filas.append({
                 "filas": n, "estructura": estructura, "modelo": familia, "k_elegido": m.k,
@@ -273,16 +288,18 @@ def main(argv=None):
     tabla, modelos, espacios = experimentos_principales(train, test, a.quick, a.seed)
 
     candidatos = tabla[tabla.exp.isin([3, 4, 5, 6])]
-    elegibles = candidatos[candidatos.tamano_minimo_train >= 0.10]  # mínimo por grupo prometido en la Entrega 2
-    LOG.info("%d de %d configuraciones cumplen el tamaño mínimo del 10 %% por grupo y pueden ser ganadoras", len(elegibles), len(candidatos))
-    candidatos = elegibles if len(elegibles) else candidatos
-    ganador = candidatos.loc[candidatos.silueta_train.idxmax()]
-    LOG.info("Modelo ganador por silueta de entrenamiento: %s, conjunto %s, K=%d (silueta train %.3f, test %.3f)", ganador.modelo,
-             ganador.conjunto, ganador.k, ganador.silueta_train, ganador.silueta_test)
+    elegibles = candidatos[(candidatos.tamano_minimo_train >= 0.10) & (candidatos.tamano_maximo_train <= 0.60)]
+    LOG.info("%d de %d configuraciones cumplen tamaños balanceados (10 %% a 60 %%) por grupo y pueden ser ganadoras", len(elegibles), len(candidatos))
+    # Cambio de mejora: antes se elegia solo por silueta maxima; ahora se usa el indice balanceado en entrenamiento
+    # (silueta + Davies-Bouldin + Calinski-Harabasz con grupos de 10 % a 60 %) para evitar elegir bloques gigantes.
+    ganador = evaluacion.seleccionar_mejor_candidato(candidatos)
+    LOG.info("Modelo ganador por criterio balanceado de entrenamiento: %s, conjunto %s, K=%d (silueta train %.3f, test %.3f, indice %.3f)", ganador.modelo,
+             ganador.conjunto, ganador.k, ganador.silueta_train, ganador.silueta_test, ganador.indice_compuesto_train)
     clave = next(k for k, m in modelos.items() if m.k == ganador.k and k[1] == ganador.conjunto and
-                 ((k[0] == "K-Means" and ganador.modelo == "K-Means ajustado") or
+                 ((k[0] == "K-Means def" and ganador.modelo == "K-Means por defecto") or
+                  (k[0] == "K-Means" and ganador.modelo == "K-Means ajustado") or
                   (k[0] == "GA" and ganador.modelo == "Algoritmo genético") or
-                  (k[0] != "GA" and k[0] != "K-Means" and ganador.modelo == "Genético " + k[0].replace("GA ", ""))))
+                  (k[0] not in ("GA", "K-Means", "K-Means def") and ganador.modelo == "Genético " + k[0].replace("GA ", ""))))
     modelo = modelos[clave]
     pre, Ztr, Zte = espacios[ganador.conjunto]
 

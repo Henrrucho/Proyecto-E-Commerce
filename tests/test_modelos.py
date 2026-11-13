@@ -40,6 +40,22 @@ def test_ga_no_acepta_grupos_menores_al_minimo():
     ga = AGClustering(k=4, poblacion=20, generaciones=20, semilla=1).fit(Z)
     cuentas = np.bincount(ga.predict(Z), minlength=4) / 500
     assert cuentas.min() > 0.08  # el mínimo es 10 % sobre la submuestra de aptitud
+    assert cuentas.max() < 0.62  # el tope maximo evita que un mega-grupo absorba todo
+
+
+def test_seleccionar_mejor_candidato_prefiere_balance_y_consenso():
+    import pandas as pd
+    tabla = pd.DataFrame([
+        # Desbalanceado: silueta alta pero 78 % en un grupo -> debe quedar descartado frente a opciones balanceadas
+        {"modelo": "Colapsado", "k": 3, "silueta_train": 0.25, "davies_bouldin_train": 2.0,
+         "calinski_harabasz_train": 1200.0, "tamano_minimo_train": 0.11, "tamano_maximo_train": 0.78},
+        {"modelo": "Balanceado K=3", "k": 3, "silueta_train": 0.17, "davies_bouldin_train": 1.9,
+         "calinski_harabasz_train": 1500.0, "tamano_minimo_train": 0.15, "tamano_maximo_train": 0.45},
+        {"modelo": "Balanceado K=4", "k": 4, "silueta_train": 0.18, "davies_bouldin_train": 1.5,
+         "calinski_harabasz_train": 1750.0, "tamano_minimo_train": 0.14, "tamano_maximo_train": 0.39},
+    ])
+    elegido = evaluacion.seleccionar_mejor_candidato(tabla)
+    assert elegido["modelo"] == "Balanceado K=4"
 
 
 def test_ga_recupera_arquetipos_en_datos_con_estructura():
