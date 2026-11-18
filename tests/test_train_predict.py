@@ -68,6 +68,15 @@ def test_predecir_no_lanza_excepciones_con_datos_malos(corrida):
     cliente = corrida["df"].iloc[0].to_dict()
     cliente["satisfaction_score"] = "texto"
     assert predict.predecir(cliente, **rutas)["status"] == "error"
+    for campo, malo in [
+        ("days_since_last_purchase", -5),
+        ("total_purchases", -1),
+        ("tenure_months", 0),
+        ("satisfaction_score", 99),
+        ("satisfaction_score", True),
+    ]:
+        invalido = {**corrida["df"].iloc[0].to_dict(), campo: malo}
+        assert predict.predecir(invalido, **rutas)["status"] == "error", (campo, malo)
 
 
 def test_sin_modelo_entrenado_responde_error(tmp_path):

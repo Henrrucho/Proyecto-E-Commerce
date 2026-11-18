@@ -68,6 +68,15 @@ def test_faltan_campos_en_el_registro(datos):
         preprocess.construir_features(datos.drop(columns=["satisfaction_score"]), "B")
 
 
+def test_tasa_devoluciones_suavizada_evita_valores_extremos(datos):
+    extremo = datos.iloc[[0]].copy()
+    extremo["total_purchases"] = 0
+    extremo["return_count"] = 10
+    X, _ = preprocess.construir_features(extremo, "B")
+    # Con +5 compras base: log1p(10 / 5) = log1p(2) ~= 1.0986, mucho menor que log1p(10) ~= 2.3979
+    assert X["log_tasa_devoluciones"].iloc[0] == pytest.approx(np.log1p(10.0 / 5.0))
+
+
 @pytest.mark.skipif(not RAW.exists(), reason="falta el dataset original")
 def test_dataset_original_cumple_el_esquema_y_no_se_modifica():
     antes = RAW.stat().st_mtime

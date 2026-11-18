@@ -10,7 +10,7 @@
   "complaint_count",
   "satisfaction_score"
  ],
- "pearson_max_abs": 0.009960887947157307,
+ "pearson_max_abs": 0.009960887947157306,
  "pearson_max_par": [
   "return_count",
   "satisfaction_score"

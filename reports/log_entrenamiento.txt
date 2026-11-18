@@ -5,54 +5,54 @@
 [INFO] Partición 80/20: Conjunto Train: 40,000 muestras | Conjunto Test: 10,000 muestras | semilla 42
 [INFO] == Experimentos 1 a 6 ==
 [INFO] Conjunto A (8 numéricas de la Entrega 2): 8 variables -> 8 componentes PCA (100 % de la varianza)
-[INFO]   K-Means K=3: silueta train 0.107 | test 0.108
-[INFO]   K-Means K=4: silueta train 0.097 | test 0.094
-[INFO]   K-Means K=5: silueta train 0.099 | test 0.093
-[INFO]   Genético  K=3: silueta train 0.104 | test 0.106 (0.9 s)
-[INFO]   Genético  K=4: silueta train 0.092 | test 0.091 (0.9 s)
-[INFO]   Genético  K=5: silueta train 0.091 | test 0.090 (1.0 s)
+[INFO]   K-Means K=3: silueta train 0.107 | test 0.106
+[INFO]   K-Means K=4: silueta train 0.097 | test 0.095
+[INFO]   K-Means K=5: silueta train 0.099 | test 0.096
+[INFO]   Genético  K=3: silueta train 0.108 | test 0.106 (4.0 s)
+[INFO]   Genético  K=4: silueta train 0.090 | test 0.092 (4.0 s)
+[INFO]   Genético  K=5: silueta train 0.092 | test 0.092 (4.0 s)
 [INFO] Conjunto B (6 conductuales): 6 variables -> 6 componentes PCA (100 % de la varianza)
-[INFO]   K-Means K=3: silueta train 0.166 | test 0.164
-[INFO]   K-Means K=4: silueta train 0.180 | test 0.180
-[INFO]   K-Means K=5: silueta train 0.191 | test 0.188
-[INFO]   Genético  K=3: silueta train 0.249 | test 0.253 (0.9 s)
-[INFO]   Genético  K=4: silueta train 0.174 | test 0.170 (0.9 s)
-[INFO]   Genético  K=5: silueta train 0.169 | test 0.163 (1.0 s)
+[INFO]   K-Means K=3: silueta train 0.156 | test 0.157
+[INFO]   K-Means K=4: silueta train 0.178 | test 0.179
+[INFO]   K-Means K=5: silueta train 0.186 | test 0.187
+[INFO]   Genético  K=3: silueta train 0.163 | test 0.160 (4.0 s)
+[INFO]   Genético  K=4: silueta train 0.170 | test 0.165 (4.0 s)
+[INFO]   Genético  K=5: silueta train 0.162 | test 0.161 (4.1 s)
 [INFO] Conjunto C (conductuales + categóricas codificadas): 57 variables -> 37 componentes PCA (95 % de la varianza)
-[INFO]   K-Means K=3: silueta train 0.164 | test 0.167
-[INFO]   K-Means K=4: silueta train 0.102 | test 0.102
-[INFO]   K-Means K=5: silueta train 0.105 | test 0.103
-[INFO]   Genético  K=3: silueta train 0.153 | test 0.152 (1.0 s)
-[INFO]   Genético  K=4: silueta train 0.099 | test 0.098 (1.0 s)
-[INFO]   Genético  K=5: silueta train 0.081 | test 0.077 (1.1 s)
-[INFO] Mejor genético por silueta de entrenamiento: conjunto B, K=3. Se usa para el ajuste del experimento 6.
-[INFO]   Genético pequeño                      silueta train 0.173 | test 0.169 (0.3 s)
-[INFO]   Genético grande                       silueta train 0.247 | test 0.251 (3.2 s)
-[INFO]   Genético híbrido (semilla K-Means++)  silueta train 0.247 | test 0.248 (1.0 s)
-[INFO] 17 de 24 configuraciones cumplen el tamaño mínimo del 10 % por grupo y pueden ser ganadoras
-[INFO] Modelo ganador por silueta de entrenamiento: Algoritmo genético, conjunto B, K=3 (silueta train 0.249, test 0.253)
-[INFO] Estabilidad K-Means (K=3, B): ARI medio 0.348, mínimo 0.101
-[INFO] Estabilidad Algoritmo genético (K=3, B): ARI medio 0.756, mínimo 0.689
+[INFO]   K-Means K=3: silueta train 0.153 | test 0.156
+[INFO]   K-Means K=4: silueta train 0.101 | test 0.103
+[INFO]   K-Means K=5: silueta train 0.102 | test 0.104
+[INFO]   Genético  K=3: silueta train 0.100 | test 0.099 (4.2 s)
+[INFO]   Genético  K=4: silueta train 0.096 | test 0.097 (4.3 s)
+[INFO]   Genético  K=5: silueta train 0.086 | test 0.085 (4.4 s)
+[INFO] Mejor genético por criterio balanceado de entrenamiento: conjunto B, K=4. Se usa para el ajuste del experimento 6.
+[INFO]   Genético pequeño                      silueta train 0.176 | test 0.175 (1.0 s)
+[INFO]   Genético grande                       silueta train 0.175 | test 0.172 (13.5 s)
+[INFO]   Genético híbrido (semilla K-Means++)  silueta train 0.177 | test 0.178 (4.1 s)
+[INFO] 16 de 24 configuraciones cumplen tamaños balanceados (10 % a 60 %) por grupo y pueden ser ganadoras
+[INFO] Modelo ganador por criterio balanceado de entrenamiento: Genético híbrido (semilla K-Means++), conjunto B, K=4 (silueta train 0.177, test 0.178, indice 0.981)
+[INFO] Estabilidad K-Means (K=4, B): ARI medio 0.766, mínimo 0.571
+[INFO] Estabilidad Algoritmo genético (K=4, B): ARI medio 0.344, mínimo 0.197
 [INFO] == Experimento 7: robustez con datasets generados ==
-[INFO]     1000 filas, estructura 0.0, K-Means            K=3 silueta 0.177 ARI n/d
-[INFO]     1000 filas, estructura 0.0, Algoritmo genético K=3 silueta 0.231 ARI n/d
-[INFO]     1000 filas, estructura 0.6, K-Means            K=3 silueta 0.282 ARI 0.035
-[INFO]     1000 filas, estructura 0.6, Algoritmo genético K=3 silueta 0.273 ARI 0.023
-[INFO]     1000 filas, estructura 1.0, K-Means            K=4 silueta 0.343 ARI 0.707
-[INFO]     1000 filas, estructura 1.0, Algoritmo genético K=3 silueta 0.377 ARI 0.297
-[INFO]    10000 filas, estructura 0.0, K-Means            K=3 silueta 0.158 ARI n/d
-[INFO]    10000 filas, estructura 0.0, Algoritmo genético K=3 silueta 0.264 ARI n/d
-[INFO]    10000 filas, estructura 0.6, K-Means            K=3 silueta 0.228 ARI 0.197
-[INFO]    10000 filas, estructura 0.6, Algoritmo genético K=3 silueta 0.292 ARI 0.039
-[INFO]    10000 filas, estructura 1.0, K-Means            K=3 silueta 0.282 ARI 0.398
-[INFO]    10000 filas, estructura 1.0, Algoritmo genético K=3 silueta 0.347 ARI 0.238
-[INFO]    50000 filas, estructura 0.0, K-Means            K=3 silueta 0.250 ARI n/d
-[INFO]    50000 filas, estructura 0.0, Algoritmo genético K=3 silueta 0.236 ARI n/d
-[INFO]    50000 filas, estructura 0.6, K-Means            K=3 silueta 0.296 ARI 0.066
-[INFO]    50000 filas, estructura 0.6, Algoritmo genético K=3 silueta 0.309 ARI 0.054
-[INFO]    50000 filas, estructura 1.0, K-Means            K=3 silueta 0.335 ARI 0.392
-[INFO]    50000 filas, estructura 1.0, Algoritmo genético K=3 silueta 0.364 ARI 0.251
-[INFO] [SUCCESS] Modelo serializado en: models\modelo_candidato.joblib
-[INFO] [SUCCESS] Escalador y PCA guardados en: models\scaler.joblib
-[INFO] [RESULTADOS EN TEST SET] silueta 0.253 | Davies-Bouldin 1.985 | Calinski-Harabasz 1258 | grupo más pequeño 10.5 %
-[INFO] [SUCCESS] Entrenamiento terminado en 73.1 segundos.
+[INFO]     1000 filas, estructura 0.0, K-Means            K=5 silueta 0.184 ARI n/d
+[INFO]     1000 filas, estructura 0.0, Algoritmo genético K=5 silueta 0.148 ARI n/d
+[INFO]     1000 filas, estructura 0.6, K-Means            K=3 silueta 0.224 ARI 0.100
+[INFO]     1000 filas, estructura 0.6, Algoritmo genético K=4 silueta 0.242 ARI 0.054
+[INFO]     1000 filas, estructura 1.0, K-Means            K=4 silueta 0.342 ARI 0.704
+[INFO]     1000 filas, estructura 1.0, Algoritmo genético K=4 silueta 0.347 ARI 0.724
+[INFO]    10000 filas, estructura 0.0, K-Means            K=5 silueta 0.180 ARI n/d
+[INFO]    10000 filas, estructura 0.0, Algoritmo genético K=5 silueta 0.165 ARI n/d
+[INFO]    10000 filas, estructura 0.6, K-Means            K=3 silueta 0.222 ARI 0.111
+[INFO]    10000 filas, estructura 0.6, Algoritmo genético K=3 silueta 0.225 ARI 0.114
+[INFO]    10000 filas, estructura 1.0, K-Means            K=4 silueta 0.337 ARI 0.651
+[INFO]    10000 filas, estructura 1.0, Algoritmo genético K=4 silueta 0.340 ARI 0.669
+[INFO]    50000 filas, estructura 0.0, K-Means            K=5 silueta 0.185 ARI n/d
+[INFO]    50000 filas, estructura 0.0, Algoritmo genético K=4 silueta 0.187 ARI n/d
+[INFO]    50000 filas, estructura 0.6, K-Means            K=3 silueta 0.238 ARI 0.113
+[INFO]    50000 filas, estructura 0.6, Algoritmo genético K=3 silueta 0.244 ARI 0.111
+[INFO]    50000 filas, estructura 1.0, K-Means            K=4 silueta 0.335 ARI 0.642
+[INFO]    50000 filas, estructura 1.0, Algoritmo genético K=4 silueta 0.337 ARI 0.665
+[INFO] [SUCCESS] Modelo serializado en: models/modelo_candidato.joblib
+[INFO] [SUCCESS] Escalador y PCA guardados en: models/scaler.joblib
+[INFO] [RESULTADOS EN TEST SET] silueta 0.178 | Davies-Bouldin 1.692 | Calinski-Harabasz 1766 | grupo más pequeño 11.5 %
+[INFO] [SUCCESS] Entrenamiento terminado en 281.9 segundos.
