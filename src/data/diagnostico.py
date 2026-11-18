@@ -1,4 +1,4 @@
-"""Diagnóstico de los datos: ¿hay relaciones entre las variables que puedan formar grupos?
+"""Diagnóstico de los datos: busca relaciones entre las variables que puedan formar grupos.
 
 Mide tres cosas y deja la evidencia en reports/ para que el documento cite cifras reales:
   1. Correlación de Pearson (relación lineal) entre las 8 numéricas de la Entrega 2.

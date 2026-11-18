@@ -156,8 +156,7 @@ checklist = [
     ("Métricas, matriz de experimentos y diagnóstico de sobreajuste", True),
     ("Modelos y transformadores serializados, `predecir()` desacoplada", True),
     ("Archivos de salida para el dashboard (`customer_assignments.csv`, `segments_summary.json`)", True),
-    ("Reporte ejecutivo `segments_report.html` (RF-08)", False),
-    ("Simulador de comportamiento y predicción supervisada (fase 2, fuera de esta entrega)", False),
+    ("Reporte ejecutivo `segments_report.html` (RF-08), generado por `src/models/exportar_dashboard.py`", True),
 ]
 hechos = sum(1 for _, ok in checklist if ok)
 avance = round(100 * hechos / len(checklist))
@@ -200,7 +199,7 @@ w(f"| Grupo más pequeño | 18 % | {pct(a_mejor.tamano_minimo_test)} | {pct(g['t
 w("")
 w(f"**Por qué no se alcanzó 0.380.** Casi todas las variables de este dataset son independientes entre sí: la correlación absoluta máxima entre las 8 numéricas de la Entrega 2 es {corr_max:.2f}, dentro del ruido esperado (±{cj['ruido_esperado_pearson']:.4f}); el detalle del cálculo está en la sección siguiente. La única relación fuerte que encontramos es entre la frecuencia de compra declarada y los días desde la última compra (razón de correlación η = {cj['eta_max']:.2f}): los días se reparten en bandas según la frecuencia (diaria 0-1, semanal 1-7, mensual 8-30, trimestral 31-90, rara vez 91-365). Esa banda de recencia es la única estructura real del dataset y es la que usan los grupos del modelo ganador. Sin más relaciones entre variables no hay grupos marcados en varias dimensiones a la vez, y la silueta de cualquier partición queda baja. Lo comprobamos de dos maneras: (1) la segmentación por reglas RFM que trae el dataset obtiene apenas {f3(rfm_b.silueta_test)} en ese mismo espacio; (2) con datasets generados con estructura (sección 3, experimento 7) los mismos algoritmos suben a silueta {f3(rob_ok.silueta_test.min())} a {f3(rob_ok.silueta_test.max())}. Es decir, el modelo funciona; los datos solo traen estructura en la recencia.")
 w("")
-w("Otras diferencias: el algoritmo genético usó 60 generaciones (la Entrega 2 decía 50) y una población de 40; los nombres de los grupos (VIP, en riesgo, etc.) del dashboard actual no salen de este modelo y deberán sustituirse en la Entrega 4 por los de `data/outputs/segments_summary.json`.")
+w("Otras diferencias: el algoritmo genético usó 60 generaciones (la Entrega 2 decía 50) y una población de 40; los nombres de los grupos (VIP, en riesgo, etc.) del dashboard anterior no salían de este modelo; en la Entrega 4 se sustituyeron por los que genera el motor.")
 w("")
 
 w("## Cómo se midieron la silueta y la correlación")
@@ -408,7 +407,7 @@ w("```python")
 w(fuente_predecir)
 w("```")
 w("")
-w("`predecir_lote(df)` aplica lo mismo a todo un DataFrame y `exportar_resultados` genera los archivos que consumirá el dashboard en la Entrega 4.")
+w("`predecir_lote(df)` aplica lo mismo a todo un DataFrame y `exportar_resultados` genera los archivos que consume el dashboard.")
 w("")
 w("### B. Prueba unitaria de entrada y salida")
 w("")
@@ -440,15 +439,10 @@ w("")
 for item, ok in checklist:
     w(f"   - [{'x' if ok else ' '}] {item}")
 w("")
-w("2. **Semáforo del sprint: con retraso moderado.** El agrupamiento está completo y reproducible, pero las cifras de la Entrega 2 no se cumplieron y siguen pendientes el reporte HTML y la fase 2.")
-w("3. **Bloqueos técnicos:**")
-w("   - El dataset no tiene estructura de grupos (variables independientes); la silueta real es 0.25, no 0.42.")
-w("   - Las cifras de la Entrega 2 y los datos del dashboard actual eran proyecciones sin código detrás; hay que corregir ambos.")
-w("   - No hay historial de compras fechado: el simulador de comportamiento (compra, abandono, cierre de cuenta) y la predicción supervisada quedan para la fase siguiente y requieren decisiones de alcance (cambian la Exclusión 2 de la Entrega 2).")
-w("4. **Plan de acción para la Entrega 4:**")
-w("   - Conectar el dashboard a `data/outputs/` (reemplazar datos estáticos y nombres de grupo) y corregir las cifras mostradas.")
-w("   - Generar `segments_report.html` (RF-08).")
-w("   - Evaluar la fase 2: catálogo de productos sintético, simulador de comportamiento de 4 clases y clasificador supervisado, declarando que aprende los supuestos del simulador.")
+w("2. **Estado del sprint: cerrado.** El agrupamiento está completo y es reproducible; el dashboard se conectó a las salidas del modelo y el reporte ejecutivo se genera con el motor (ver `README.md`).")
+w("3. **Limitaciones conocidas:**")
+w("   - El dataset no tiene estructura de grupos (variables independientes); la silueta medida es 0.25, por debajo del objetivo de 0.38 de la Entrega 2.")
+w("   - No hay historial de compras fechado, por lo que el simulador de comportamiento y la predicción supervisada quedan fuera del alcance del sistema (Exclusión 2 de la Entrega 2).")
 w("")
 w("## Uso de herramientas de IA")
 w("")

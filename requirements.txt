@@ -1,8 +1,9 @@
-numpy>=2.0
-pandas>=2.2
-scikit-learn>=1.5
-scipy>=1.13
-joblib>=1.4
-matplotlib>=3.8
-pytest>=8.0
-nbformat>=5.9
+# Versiones con las que se entrenó y probó el proyecto (Python 3.14.7).
+numpy==2.5.3
+pandas==3.0.6
+scikit-learn==1.9.1
+scipy==1.18.1
+joblib==1.6.0
+matplotlib==3.11.2
+pytest==9.2.0
+nbformat==5.11.1
