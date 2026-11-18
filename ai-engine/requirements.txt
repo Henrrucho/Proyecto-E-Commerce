@@ -1,5 +1,2 @@
-pandas==2.2.2
-numpy==1.26.4
-scikit-learn==1.5.2
-matplotlib==3.8.0
-seaborn==0.13.2
+# Las dependencias del motor de IA están en el requirements.txt de la raíz (versiones fijas y probadas).
+-r ../requirements.txt
